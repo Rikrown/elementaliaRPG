@@ -1,21 +1,61 @@
-import * as rpgDiceRoller from '@dice-roller/rpg-dice-roller';
-import { DiceRoll, DiceRoller } from '@dice-roller/rpg-dice-roller';
+import { DiceRoll } from '@dice-roller/rpg-dice-roller';
 
-const roller = new DiceRoller();
+const res = await fetch('http://localhost:3000/skills/1');
+const skill = await res.json();
 
-let defaultDice = '';
-let x = '';
+const modifierTotal = skill.modifiers.reduce(
+  (sum, m) => sum + m.value, 0
+);
+const rollHistory = [];
 
-document.getElementById('dadoType').valueOf(`dadoType`).innerHTML = defaultDice;
-document.getElementById('dadoNumber').innerHTML = x;
+function addToHistory(rollResult, expression, modifier) {
+  rollHistory.push({
+    expression,
+    total: rollResult.total,
+    rolls: rollResult.rolls.map((r) => r.value),
+    modifier,
+    timestamp: new Date().toISOString(),
+  });
 
-function roll(){
-  defaultDice = x + defaultDice;
-  let rollResult;
-  rollResult = new DiceRoll(defaultDice);
-  return rollResult;
+  renderHistory();
 }
-let resultFinal;
-resultFinal = roll();
-let resultElement = document.getElementById('resultHtml');
-resultElement.innerHTML = roll();
+
+function renderHistory() {
+  const historyEl = document.getElementById('history');
+  historyEl.innerHTML = '';
+
+  rollHistory.forEach((item) => {
+    const li = document.createElement('li');
+    li.textContent = `[${item.timestamp}] ${item.expression} → ${item.total}`;
+    historyEl.appendChild(li);
+  });
+}
+
+function calculateModifier(modifiers) {
+  return modifiers.reduce((sum, mod) => sum + mod.value, 0);
+}
+
+
+function roll() {
+  const diceSelect = document.getElementById('dadoType');
+  const numberInput = document.getElementById('dadoNumber');
+  const resultElement = document.getElementById('resultHtml');
+
+  const selectedDice = diceSelect.value;   // ex: "d6"
+  const selectedNum = numberInput.value;   // ex: "3"
+
+  const rollExpression = `${selectedNum}${selectedDice}`; // "3d6"
+
+  const result = new DiceRoll(rollExpression);
+
+  resultElement.textContent = `Resultado final: ${result.total}`;
+}
+
+let maxBuffs = Math.floor(character.level / 2); //nivel de Elemento
+buff.compatibleType === skill.type; //compatibilidade entre propriedades - habilidades
+if (!buff.reusable && alreadyUsedThisTurn) throw Error; //reusabilidade (importante para Melhorar Habilidade)
+const baseRoll = `${num}${dice}`; // "3d6"
+const modifierTotal = calculateModifier(modifiers);
+
+// associa o botão ao evento
+document.getElementById('rollBtn').addEventListener('click', roll);

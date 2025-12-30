@@ -1,0 +1,139 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url = env("DATABASE_URL")
+}
+
+enum SkillCategory { //tipo de habilidade
+  ELEMENT
+  CLASS
+}
+
+enum AttributeType { //atributos
+  FOR
+  AGI
+  INT
+  CAR
+  CON
+  MEN
+}
+
+model SkillCheck { //teste de perícias
+  id          Int           @id @default(autoincrement())
+  name        String
+  attribute   AttributeType
+}
+
+model CharacterSkill { //nível de perícia da entidade
+  id          Int
+  characterId Int
+  skillId     Int
+  level       Int   // 0 a 5
+
+  character   Entity @relation(fields: [characterId], references: [id])
+}
+
+enum SkillType { //tipo de habilidade
+  MELEE
+  RANGED
+  SUPPORT
+  AREA
+}
+
+model Turn { //modelagem de turnos consecutivos (base para buffs de duração)
+  id        Int      @id @default(autoincrement())
+  number    Int
+  active    Boolean @default(true)
+  createdAt DateTime @default(now())
+}
+
+model Skill { //base para habilidades
+  id          Int       @id @default(autoincrement())
+  name        String
+  baseDice    String
+  type        SkillType
+  category SkillCategory
+  staminaCost Int
+  balanceCost Int
+
+  modifiers   SkillModifier[]
+}
+
+model BuffSkillType { //base para propriedades modificarem habilidades de mesma compatilibilidade
+  id      Int       @id @default(autoincrement())
+  buffId  Int
+  type    SkillType
+
+  buff    Buff      @relation(fields: [buffId], references: [id])
+}
+
+model Buff { //propriedades de... propriedades
+  id            Int              @id @default(autoincrement())
+  name          String
+  description   String
+  reusable      Boolean
+  durationTurns Int
+
+  effects       BuffEffect[]
+  compatible    BuffSkillType[]
+}
+
+model BuffEffect { //efeito prático das propriedades
+  id       Int    @id @default(autoincrement())
+  buffId   Int
+
+  stat     String   // "diceCount", "staminaCost", "damageMultiplier"
+  value    Float
+  priority Int      // 0, 1 ou 2
+
+  buff     Buff     @relation(fields: [buffId], references: [id])
+}
+
+model ActiveBuff { //define estado ativo do buff (eu acho?)
+  id          Int      @id @default(autoincrement())
+  buffId      Int
+  characterId Int
+  skillId     Int
+  turn        Int
+
+  buff        Buff     @relation(fields: [buffId], references: [id])
+}
+
+
+model SkillModifier {// real não lembro
+  id        Int      @id @default(autoincrement())
+  label     String   // ex: "Força", "Espada Longa"
+  value     Int      // pode ser negativo
+  skillId   Int
+
+  skill     Skill    @relation(fields: [skillId], references: [id])
+}
+
+model RollHistory { //histórico de rolagens
+  id          Int      @id @default(autoincrement())
+  expression  String   // "1d20+4"
+  total       Int
+  rolls       String   // JSON serializado "[4, 15]"
+  createdAt   DateTime @default(now())
+}
+
+model Entity {
+  id        Int      @id @default(autoincrement())
+  name      String
+  maxHp     Int
+  hp        Int
+  stamina   Int
+  balance   Int
+  createdAt DateTime @default(now())
+
+  buffs     ActiveBuff[]
+}
