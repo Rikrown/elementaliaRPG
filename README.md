@@ -43,7 +43,7 @@ You can use both Charged and Dual Shot on a Fireball at the same type, but not L
 Damage: (1dice-1dice+2dice)*2  
 Stamina: ((2+4+6)*2)*2
 
-Which, again, not that complicated, but kinda dauting to most new players and is a major pacing issue.
+Which, again, not *that* complicated, but kinda daunting to most new players and is a major pacing issue.
 
 ## The Site
 
@@ -62,6 +62,7 @@ But yeah, that's it for now.
 Honestly, I never thought of actually making this into a full game. It always was just a way to be crative and have fun with some friends. But seeing more people interacting with the game, and liking it just as much if not more than me... it means something.
 
 So if you want to support this project, I'm eventually going to put some links down here for contact and funding, if it ever makes that far. Any kind of (respectful) criticism and/or help is welcomed and appreciated.
+
 
 
 
