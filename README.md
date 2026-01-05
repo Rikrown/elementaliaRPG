@@ -1,4 +1,4 @@
-﻿# elementaliaRPG
+﻿# ElementaliaRPG
 
 Ok, so... what is Elementalia?
 
@@ -63,6 +63,4 @@ Honestly, I never thought of actually making this into a full game. It always wa
 
 So if you want to support this project, I'm eventually going to put some links down here for contact and funding, if it ever makes that far. Any kind of (respectful) criticism and/or help is welcomed and appreciated.
 
-
-
-
+Sorry if this isn't a typical README, I'm kinda new to the whole GitHub stuff. Might eventually change this.
