@@ -1,41 +1,46 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="UTF-8" />
-  <link rel="icon" type="image/svg+xml" href="/webstorm-icon-logo.svg" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>WS playground</title>
-  <link rel="stylesheet" href="/style.css">
+  <title>Combate RPG</title>
 </head>
 <body>
-<script type="module" src="/src/main.js"></script>
-<main id="app">
-  <h1 class="title">
-    Calculadora básica <br /> Elementalia RPG
-  </h1>
-  <section class="calculadora">
-    <div class="calculadoraDecision">
-      <label for="dadoType"> Selecione tipo de dado </label>
-      <select id="dadoType">
-        <option value="d3">d3</option>
-        <option value="d4">d4</option>
-        <option value="d6">d6</option>
-        <option value="d8">d8</option>
-        <option value="d10">d10</option>
-        <option value="d12">d12</option>
-        <option value="d20">d20</option>
-      </select>
-    </div>
-    <div class="calculadoraMultiplier">
-      <label for="dadoNumber"> Digite quantos dados você quer rolar: </label>
-      <label for="dadoNumber"></label><input type="number" id="dadoNumber">
-    </div>
-    <div class="calculadora-result">
-      <button onclick="roll()">Calcular</button>
-    </div>
-    <div id="resultHtml">Aqui</div>
-  </section>
-</main>
 
+<h2>Combate</h2>
+
+<p>Ações: <span id="actionsTurn"></span></p>
+<p>HP Inimigo: <span id="enemyHp"></span></p>
+
+<button onclick="attack()">Atacar</button>
+
+<pre id="log"></pre>
+
+<h2>Criar Buff</h2>
+
+<input id="buffName" placeholder="Nome do Buff" />
+<label>
+  <input type="checkbox" id="reusable" />
+  Reutilizável
+</label>
+
+<h3>Efeitos</h3>
+<div id="effects"></div>
+
+<button onclick="addEffect()">Adicionar efeito</button>
+<button onclick="saveBuff()">Salvar Buff</button>
+
+
+<h1>Teste de Combate</h1>
+
+<button id="attackBtn">Atacar</button>
+
+<p>Ações restantes: <span id="actions"></span></p>
+
+<button onclick="attack()">Atacar</button>
+<button onclick="bonus()">Buff (Bônus)</button>
+
+<pre id="logBattle"></pre>
+
+<script src="main.js"></script>
 </body>
 </html>
