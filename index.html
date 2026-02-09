@@ -1,19 +1,21 @@
 <!doctype html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-<<<<<<< HEAD
+  <meta charset="UTF-8"/>
   <link rel="icon" type="image/svg+xml" href="/webstorm-icon-logo.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>WS playground</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="src/estilo.css">
 </head>
 <body>
 <script src="src/main.js"></script>
+
 <main id="app">
+
   <h1 class="title">
     Calculadora básica <br /> Elementalia RPG
   </h1>
+
   <section class="calculadora">
     <div class="calculadoraDecision">
       <label for="dadoType"> Selecione tipo de dado </label>
@@ -37,48 +39,54 @@
     <div id="resultHtml">Aqui</div>
     <div id="resultDados">Valores</div>
   </section>
-</main>
-=======
-  <title>Combate RPG</title>
-</head>
-<body>
->>>>>>> main
 
-<h2>Combate</h2>
+  <section>
+  <div>
+    <input type="text" placeholder="Nome:">
+  </div>
+  <div>
+    <input type="text" placeholder="Elemento:">
+  </div>
+  </section>
 
-<p>Ações: <span id="actionsTurn"></span></p>
-<p>HP Inimigo: <span id="enemyHp"></span></p>
+  <section>
+  <div id="statVida">
+    <label>Vida:</label>
+    <input id="hpMax" type="number" placeholder="Vida Maxima">
+    <span> / </span>
+    <input id="hpAtual" type="number" placeholder="Vida Atual">
+  </div>
+  <div id="statFolego">
+    <label>Folego:</label>
+    <input id="folegoMax" type="number" placeholder="Folego Maximo">
+    <span> / </span>
+    <input id="folegoAtual" type="number" placeholder="Folego Atual">
+  </div>
+  </section>
 
-<button onclick="attack()">Atacar</button>
-
-<pre id="log"></pre>
-
-<h2>Criar Buff</h2>
-
-<input id="buffName" placeholder="Nome do Buff" />
-<label>
-  <input type="checkbox" id="reusable" />
-  Reutilizável
-</label>
-
-<h3>Efeitos</h3>
-<div id="effects"></div>
-
-<button onclick="addEffect()">Adicionar efeito</button>
-<button onclick="saveBuff()">Salvar Buff</button>
-
-
-<h1>Teste de Combate</h1>
-
-<button id="attackBtn">Atacar</button>
-
-<p>Ações restantes: <span id="actions"></span></p>
-
-<button onclick="attack()">Atacar</button>
-<button onclick="bonus()">Buff (Bônus)</button>
-
-<pre id="logBattle"></pre>
-
-<script src="main.js"></script>
-</body>
-</html>
+  <section>
+  <div>
+    <label>Força:</label>
+    <input id="for" type="number" placeholder="Força">
+  </div>
+  <div>
+    <label>Agilidade:</label>
+    <input id="agi" type="number" placeholder="Agilidade">
+  </div>
+  <div>
+    <label>Constituição:</label>
+    <input id="con" type="number" placeholder="Constituição">
+  </div>
+  <div>
+    <label>Inteligencia:</label>
+    <input id="int" type="number" placeholder="Inteligencia">
+  </div>
+  <div>
+    <label>Carisma:</label>
+    <input id="car" type="number" placeholder="Carisma">
+  </div>
+  <div>
+    <label>Mente:</label>
+    <input id="men" type="number" placeholder="Mente">
+  </div>
+  </section>
