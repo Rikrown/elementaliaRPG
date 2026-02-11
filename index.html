@@ -40,53 +40,56 @@
     <div id="resultDados">Valores</div>
   </section>
 
+  <form action="/salvar-personagem" method="POST">
   <section>
   <div>
-    <input type="text" placeholder="Nome:">
+    <input type="text" name="nome" placeholder="Nome:">
   </div>
   <div>
-    <input type="text" placeholder="Elemento:">
+    <input type="text" name="elemento" placeholder="Elemento:">
   </div>
   </section>
 
   <section>
   <div id="statVida">
     <label>Vida:</label>
-    <input id="hpMax" type="number" placeholder="Vida Maxima">
+    <input id="hpMax" name="vidaMax" type="number" placeholder="Vida Maxima">
     <span> / </span>
-    <input id="hpAtual" type="number" placeholder="Vida Atual">
+    <input id="hpAtual" name="vidaAtual" type="number" placeholder="Vida Atual">
   </div>
   <div id="statFolego">
     <label>Folego:</label>
-    <input id="folegoMax" type="number" placeholder="Folego Maximo">
+    <input id="folegoMax" name="folMax" type="number" placeholder="Folego Maximo">
     <span> / </span>
-    <input id="folegoAtual" type="number" placeholder="Folego Atual">
+    <input id="folegoAtual" name="folAtual" type="number" placeholder="Folego Atual">
   </div>
   </section>
 
   <section>
   <div>
     <label>Força:</label>
-    <input id="for" type="number" placeholder="Força">
+    <input id="for" name="forca" type="number" placeholder="Força">
   </div>
   <div>
     <label>Agilidade:</label>
-    <input id="agi" type="number" placeholder="Agilidade">
+    <input id="agi" name="agilidade" type="number" placeholder="Agilidade">
   </div>
   <div>
     <label>Constituição:</label>
-    <input id="con" type="number" placeholder="Constituição">
+    <input id="con" name="constituicao" type="number" placeholder="Constituição">
   </div>
   <div>
     <label>Inteligencia:</label>
-    <input id="int" type="number" placeholder="Inteligencia">
+    <input id="int" name="inteligencia" type="number" placeholder="Inteligencia">
   </div>
   <div>
     <label>Carisma:</label>
-    <input id="car" type="number" placeholder="Carisma">
+    <input id="car" name="carisma" type="number" placeholder="Carisma">
   </div>
   <div>
     <label>Mente:</label>
-    <input id="men" type="number" placeholder="Mente">
+    <input id="men" name="mente" type="number" placeholder="Mente">
   </div>
   </section>
+    <button type="submit">Salvar personagem</button>
+  </form>
