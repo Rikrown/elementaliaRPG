@@ -15,3 +15,19 @@ function roll(){
   document.getElementById("resultHtml").innerHTML = somaTotal;
   document.getElementById("resultDados").innerHTML = listaResultados.join(" + ");
 }
+
+const btnMostrar = document.getElementById('btn-mostrar');
+const listaPGs = document.getElementById('lista-personagens');
+
+btnMostrar.addEventListener('click', () => {
+    // Aqui entra o fetch
+    fetch('/mostrar-personagens')
+        .then(response => response.json()) // Converte para JSON
+        .then(personagens => {
+          listaPGs.innerHTML = "";
+          for (let i=0; i < personagens.length; i++){
+            let p = personagens[i];
+            listaPGs.innerHTML += `<p>${p.nome} - Elemento: ${p.elemento}</p>`
+          }
+        });
+});

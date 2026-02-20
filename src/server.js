@@ -62,34 +62,36 @@ app.get("/", (req, res) => {
 });
 
 app.post("/salvar-personagem", (req, res) => {
-  const nomeDoPersonagem = req.body.nome;
-  const elementoDoPersonagem = req.body.elemento;
-  const vidaMaxDoPersonagem = req.body.vidaMax;
-  const vidaAtualDoPersonagem = req.body.vidaAtual;
-  const folMaxDoPersonagem = req.body.folMax;
-  const folAtualDoPersonagem = req.body.folAtual;
-  const forcaDoPersonagem = req.body.forca;
-  const agilidadeDoPersonagem = req.body.agilidade;
-  const constituicaoDoPersonagem = req.body.constituicao;
-  const inteligenciaDoPersonagem = req.body.inteligencia;
-  const carismaDoPersonagem = req.body.carisma;
-  const menteDoPersonagem = req.body.mente;
+  const { 
+    nome, 
+    elemento, 
+    vidaMax, 
+    vidaAtual, 
+    folMax, 
+    folAtual, 
+    forca, 
+    agilidade, 
+    constituicao, 
+    inteligencia, 
+    carisma, 
+    mente 
+  } = req.body;
 
   const sql = "INSERT INTO personagens (nome, elemento, vidamax, vidaatual, folegomax, folegoatual, forca, agilidade, constituicao, inteligencia, carisma, mente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
   const valores = [
-  nomeDoPersonagem, 
-  elementoDoPersonagem, 
-  vidaMaxDoPersonagem, 
-  vidaAtualDoPersonagem, 
-  folMaxDoPersonagem, 
-  folAtualDoPersonagem, 
-  forcaDoPersonagem, 
-  agilidadeDoPersonagem, 
-  constituicaoDoPersonagem, 
-  inteligenciaDoPersonagem, 
-  carismaDoPersonagem, 
-  menteDoPersonagem
+    nome, 
+    elemento, 
+    vidaMax, 
+    vidaAtual, 
+    folMax, 
+    folAtual, 
+    forca, 
+    agilidade, 
+    constituicao, 
+    inteligencia, 
+    carisma, 
+    mente 
 ];
 
   connection.query(sql, valores, (err, result) => {
@@ -98,6 +100,22 @@ app.post("/salvar-personagem", (req, res) => {
       res.send("Erro ao salvar o personagem");
     } else {
       res.send("Personagem salvo com sucesso!");
+    }
+  });
+});
+
+app.get("/mostrar-personagens", (req, res) => {
+
+  const sql = "SELECT * FROM personagens"
+
+  connection.query(sql, (err, results) => {
+    if (err) {
+        console.log("Erro ao buscar:", err);
+        res.send("Erro ao exibir personagens");
+    } else {
+        // 'results' aqui é a lista de personagens que veio do MySQL!
+        console.log(results); 
+        res.json(results); 
     }
   });
 });
