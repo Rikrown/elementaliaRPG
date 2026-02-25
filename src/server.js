@@ -120,6 +120,22 @@ app.get("/mostrar-personagens", (req, res) => {
   });
 });
 
+app.delete("/excluir-personagem/:id", (req, res) =>{
+  const idRecebido = req.params.id;
+
+  const sql = "DELETE FROM personagens WHERE id = ?"
+
+  connection.query(sql, [idRecebido], (err, results) => {
+    if (err) {
+        console.log("Erro ao excluir:", err);
+        res.send("Erro ao excluir personagem");
+    } else {
+        console.log("Personagem excluido"); 
+        res.send("Personagem excluido com sucesso");
+    }
+  });
+});
+
 app.listen(3000, () => {
   console.log("Servidor rodando em http://localhost:3000 ");
 });
