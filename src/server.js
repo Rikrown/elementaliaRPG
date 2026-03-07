@@ -74,12 +74,37 @@ app.post("/salvar-personagem", (req, res) => {
     constituicao, 
     inteligencia, 
     carisma, 
-    mente 
+    mente,
+    id
   } = req.body;
 
-  const sql = "INSERT INTO personagens (nome, elemento, vidamax, vidaatual, folegomax, folegoatual, forca, agilidade, constituicao, inteligencia, carisma, mente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+  let sql = "";
+  let valores = [];
 
-  const valores = [
+  if (id) {
+    // Lógica de ATUALIZAR (UPDATE)
+  sql = "UPDATE personagens SET nome = ?, elemento = ?, vidamax = ?, vidaatual = ?, folegomax = ?, folegoatual = ?, forca = ?, agilidade = ?, constituicao = ?, inteligencia = ?, carisma = ?, mente = ? WHERE id = ?";
+  
+    valores = [
+    nome, 
+    elemento, 
+    vidaMax, 
+    vidaAtual, 
+    folMax, 
+    folAtual, 
+    forca, 
+    agilidade, 
+    constituicao, 
+    inteligencia, 
+    carisma, 
+    mente,
+    id
+];
+
+  } else {
+  sql = "INSERT INTO personagens (nome, elemento, vidamax, vidaatual, folegomax, folegoatual, forca, agilidade, constituicao, inteligencia, carisma, mente) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+  valores = [
     nome, 
     elemento, 
     vidaMax, 
@@ -93,6 +118,7 @@ app.post("/salvar-personagem", (req, res) => {
     carisma, 
     mente 
 ];
+  }
 
   connection.query(sql, valores, (err, result) => {
     if (err) {
@@ -135,6 +161,27 @@ app.delete("/excluir-personagem/:id", (req, res) =>{
     }
   });
 });
+
+app.get("/buscar-personagem/:id", (req, res) =>{
+  const idRecebido = req.params.id;
+
+  const sql = `SELECT * FROM personagens WHERE id = ?`
+
+  connection.query(sql, [idRecebido], (err, results) => {
+    if (err) {
+        console.error("Erro na busca:", err);
+        res.status(500).send("Erro interno do servidor");
+    } else {
+        // Se a lista (results) tiver algo, pegamos a primeira posição [0]
+        if (results.length > 0) {
+            res.json(results[0]); 
+        } else {
+            // Se a lista vier vazia []
+            res.status(404).send("Personagem não encontrado");
+        }
+      }
+  })
+})
 
 app.listen(3000, () => {
   console.log("Servidor rodando em http://localhost:3000 ");

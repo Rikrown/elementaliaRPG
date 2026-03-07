@@ -45,7 +45,28 @@ function atualizarLista() {
                 listaPGs.innerHTML += `
                     <p>${p.nome} - Elemento: ${p.elemento}</p>
                     <button onclick="deletarPersonagem(${p.id})">Excluir</button>
+                    <button onclick="editarPersonagem(${p.id})">Editar</button>
                 `;
             }
         });
+}
+
+function editarPersonagem(id){
+    fetch(`/buscar-personagem/${id}`)
+      .then(response => response.json())
+      .then(personagem => {
+          document.getElementById("idPersonagem").value = personagem.id;
+          document.getElementById("n").value = personagem.nome;
+          document.getElementById("e").value = personagem.elemento;
+          document.getElementById("hpMax").value = personagem.vidamax;
+          document.getElementById("hpAtual").value = personagem.vidaatual;
+          document.getElementById("folegoMax").value = personagem.folegomax;
+          document.getElementById("folegoAtual").value = personagem.folegoatual;
+          document.getElementById("for").value = personagem.forca;
+          document.getElementById("agi").value = personagem.agilidade;
+          document.getElementById("con").value = personagem.constituicao;
+          document.getElementById("int").value = personagem.inteligencia;
+          document.getElementById("car").value = personagem.carisma;
+          document.getElementById("men").value = personagem.mente;
+   })
 }
